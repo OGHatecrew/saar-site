@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>$SAAR — Just another Indian IT guy. Trying to make it out.</title>
+<meta name="description" content="$SAAR. Just another Indian IT guy. Trying to make it out. We're not sure what happens next either. But we're here for it.">
+
+<!-- Social preview -->
+<meta property="og:title" content="$SAAR — Just another Indian IT guy. Trying to make it out.">
+<meta property="og:description" content="We're not sure what happens next either. But we're here for it.">
+<meta property="og:image" content="assets/social-banner.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" href="assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ PASSWORD GATE ============ -->
+<div id="gate" class="gate" hidden>
+  <div class="gate-card">
+    <img src="assets/logo.png" alt="SAAR" class="gate-logo">
+    <h1 class="gate-title">This page is private</h1>
+    <p class="gate-sub">Enter the password to continue.</p>
+    <form id="gate-form" autocomplete="off">
+      <input type="password" id="gate-password" placeholder="Password" autocomplete="off" required>
+      <button type="submit">Unlock</button>
+    </form>
+    <p id="gate-error" class="gate-error" hidden>Wrong password. Try again.</p>
+  </div>
+</div>
+
+<!-- ============ SITE CONTENT ============ -->
+<div id="site-content">
+
+  <header class="header" id="site-header">
+    <a href="#home" class="brand">
+      <img src="assets/logo.png" alt="SAAR logo" class="brand-logo">
+      <span class="brand-name">SAAR</span>
+    </a>
+
+    <nav class="nav" id="main-nav">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#follow" class="nav-link">Follow</a>
+    </nav>
+
+    <a href="https://x.com/RealSaarRH" target="_blank" rel="noopener" class="btn btn-follow header-follow">
+      <svg viewBox="0 0 24 24" class="x-icon" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-6.7L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.1L18.9 2zm-1.2 18h1.7L7.4 3.9H5.6L17.7 20z"/></svg>
+      Follow SAAR
+    </a>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#home" class="nav-link">Home</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#follow" class="nav-link">Follow</a>
+    <a href="https://x.com/RealSaarRH" target="_blank" rel="noopener" class="btn btn-follow">
+      <svg viewBox="0 0 24 24" class="x-icon" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-6.7L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.1L18.9 2zm-1.2 18h1.7L7.4 3.9H5.6L17.7 20z"/></svg>
+      Follow SAAR
+    </a>
+  </div>
+
+  <main>
+    <section id="home" class="hero" style="background-image:url(assets/hero-bg.png);">
+      <div class="hero-cta">
+        <a href="https://x.com/RealSaarRH" target="_blank" rel="noopener" class="btn btn-follow btn-large">
+          <svg viewBox="0 0 24 24" class="x-icon" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-6.7L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.1L18.9 2zm-1.2 18h1.7L7.4 3.9H5.6L17.7 20z"/></svg>
+          Follow SAAR
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <a href="#about" class="scroll-cue" aria-label="Scroll down">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </section>
+
+    <section id="about" class="about">
+      <div class="section-inner">
+        <h2 class="section-title">About SAAR</h2>
+        <p class="section-lead">
+          Meet SAAR — an average IT guy at a small firm, chasing an extraordinary dream.
+          A relatable, meme-first journey about grinding through DSA, deadlines and EMIs
+          while still believing one day could be the day.
+        </p>
+        <p class="section-lead">
+          <em>This section is a placeholder — send over the real "About SAAR" story / token details
+          and I'll drop them in here.</em>
+        </p>
+      </div>
+    </section>
+
+    <section id="follow" class="follow">
+      <div class="section-inner">
+        <h2 class="section-title">Follow the journey</h2>
+        <p class="section-lead">Same guy. Bigger dreams. Follow along for updates.</p>
+        <a href="https://x.com/RealSaarRH" target="_blank" rel="noopener" class="btn btn-follow btn-large">
+          <svg viewBox="0 0 24 24" class="x-icon" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-6.7L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.1L18.9 2zm-1.2 18h1.7L7.4 3.9H5.6L17.7 20z"/></svg>
+          Follow SAAR
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>SAAR — Same guy. Bigger dreams.</p>
+    <p class="fine-print">This is a meme, saar. Not a financial plan. Please don’t blame saar.</p>
+  </footer>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
