@@ -13,7 +13,7 @@
 // (see README.md for exact steps for your host).
 
 window.SITE_CONFIG = {
-  LOCKED: true,
+  LOCKED: false,
 
   // This is NOT the plain password — it's a scrambled (SHA-256) version of it.
   // Default password is: securemysaar
