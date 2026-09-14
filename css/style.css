@@ -107,7 +107,7 @@ section{scroll-margin-top:88px;}
 .hero-cta{
   position:absolute;
   left:22%;
-  bottom:clamp(150px,23vh,250px);
+  bottom:clamp(110px,18vh,200px);
   transform:translateX(-50%);
 }
 .hero-cta .btn{padding:13px 20px;font-size:14px;}
