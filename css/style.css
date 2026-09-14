@@ -40,7 +40,7 @@ section{scroll-margin-top:88px;}
   position:fixed;top:0;left:0;right:0;z-index:40;
   display:flex;align-items:center;gap:24px;
   padding:18px clamp(16px,4vw,48px);
-  background:linear-gradient(180deg, rgba(10,10,10,.5) 0%, rgba(10,10,10,.15) 65%, rgba(10,10,10,0) 100%);
+  background:linear-gradient(180deg, rgba(10,10,10,.5) 0%, rgba(10,10,10,.18) 45%, rgba(10,10,10,0) 70%);
   border-bottom:1px solid transparent;
   color:#fff;
   transition:background .25s ease, border-color .25s ease, backdrop-filter .25s ease, padding .25s ease, color .25s ease;
@@ -106,10 +106,11 @@ section{scroll-margin-top:88px;}
 }
 .hero-cta{
   position:absolute;
-  left:26%;
-  bottom:clamp(48px,10vh,110px);
+  left:22%;
+  bottom:clamp(150px,23vh,250px);
   transform:translateX(-50%);
 }
+.hero-cta .btn{padding:13px 20px;font-size:14px;}
 .hero-cta .btn{box-shadow:0 8px 24px rgba(0,0,0,.25);}
 
 .scroll-cue{
