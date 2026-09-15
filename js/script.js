@@ -178,15 +178,26 @@
     if (!cfg || !cfg.TOKEN_CONTRACT || !cfg.TOKEN_RPC_URL) return;
 
     try {
-      // Circulating Supply = live on-chain totalSupply().
+      var paddedDead = cfg.TOKEN_BURN_ADDRESS.replace(/^0x/, "").padStart(64, "0");
+
+      // totalSupply() and balanceOf(deadAddress) — burns on this token happen
+      // two ways: real supply reduction (totalSupply() drops below genesis)
+      // and tokens routed to the dead/burn wallet (still counted in
+      // totalSupply(), but permanently unspendable).
       var totalSupplyHex = await ethCall(cfg.TOKEN_RPC_URL, cfg.TOKEN_CONTRACT, "0x18160ddd");
+      var deadBalanceHex = await ethCall(cfg.TOKEN_RPC_URL, cfg.TOKEN_CONTRACT, "0x70a08231" + paddedDead);
 
       var divisor = 10n ** BigInt(cfg.TOKEN_DECIMALS || 18);
       var totalSupplyRaw = BigInt(totalSupplyHex);
-      var circulating = totalSupplyRaw / divisor;
+      var deadBalanceRaw = BigInt(deadBalanceHex);
 
-      // Total burnt = the fixed genesis supply (1B) minus the live
-      // totalSupply() — how much has been removed from supply since launch.
+      // Circulating = live totalSupply() minus whatever sits in the dead
+      // address (still counted in totalSupply, but unspendable).
+      var circulating = (totalSupplyRaw - deadBalanceRaw) / divisor;
+
+      // Total burnt = the fixed genesis supply (1B) minus circulating —
+      // this captures both real supply-reduction burns and tokens exiled
+      // to the dead address.
       var fixedTotal = BigInt(cfg.TOKEN_TOTAL_SUPPLY);
       var burnt = fixedTotal - circulating;
 
