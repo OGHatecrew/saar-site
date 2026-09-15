@@ -149,11 +149,69 @@
     });
   }
 
+  async function ethCall(rpcUrl, to, data) {
+    var res = await fetch(rpcUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        id: 1,
+        method: "eth_call",
+        params: [{ to: to, data: data }, "latest"]
+      })
+    });
+    var json = await res.json();
+    if (json.error) throw new Error(json.error.message || "RPC error");
+    return json.result;
+  }
+
+  function formatWithCommas(numStr) {
+    return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  async function initTokenomicsStats() {
+    var circEl = document.getElementById("circulating-supply");
+    var burntEl = document.getElementById("total-burnt");
+    if (!circEl || !burntEl) return;
+
+    var cfg = window.SITE_CONFIG;
+    if (!cfg || !cfg.TOKEN_CONTRACT || !cfg.TOKEN_RPC_URL) return;
+
+    try {
+      var paddedDead = cfg.TOKEN_BURN_ADDRESS.replace(/^0x/, "").padStart(64, "0");
+
+      // totalSupply() and balanceOf(burnAddress) function selectors
+      var totalSupplyHex = await ethCall(cfg.TOKEN_RPC_URL, cfg.TOKEN_CONTRACT, "0x18160ddd");
+      var deadBalanceHex = await ethCall(cfg.TOKEN_RPC_URL, cfg.TOKEN_CONTRACT, "0x70a08231" + paddedDead);
+
+      var divisor = 10n ** BigInt(cfg.TOKEN_DECIMALS || 18);
+      var totalSupplyRaw = BigInt(totalSupplyHex);
+      var deadBalanceRaw = BigInt(deadBalanceHex);
+
+      // Circulating = on-chain totalSupply() minus whatever sits in the
+      // dead/burn address (still counted in totalSupply, but unspendable).
+      var circulating = (totalSupplyRaw - deadBalanceRaw) / divisor;
+
+      // Total burnt = the fixed genesis supply minus current circulating —
+      // this captures both tokens actually destroyed (lowering totalSupply)
+      // and tokens exiled to the dead address.
+      var fixedTotal = BigInt(cfg.TOKEN_TOTAL_SUPPLY);
+      var burnt = fixedTotal - circulating;
+
+      circEl.textContent = formatWithCommas(circulating.toString());
+      burntEl.textContent = formatWithCommas(burnt.toString());
+    } catch (err) {
+      // Leave the static fallback numbers already in the HTML untouched.
+      console.error("Tokenomics live stats fetch failed:", err);
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initGate();
     initHeaderScroll();
     initMobileNav();
     initActiveNav();
     initJourneyProgress();
+    initTokenomicsStats();
   });
 })();
