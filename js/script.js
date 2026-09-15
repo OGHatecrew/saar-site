@@ -112,10 +112,48 @@
     sections.forEach(function (s) { observer.observe(s); });
   }
 
+  function initJourneyProgress() {
+    var items = document.querySelectorAll(".timeline-item");
+    if (!items.length) return;
+
+    var live = !!(window.SITE_CONFIG && SITE_CONFIG.JOURNEY_LIVE);
+    var athTier = 0;
+    if (window.SITE_CONFIG && typeof SITE_CONFIG.JOURNEY_ATH_TIER === "number") {
+      athTier = SITE_CONFIG.JOURNEY_ATH_TIER;
+    }
+
+    items.forEach(function (item) {
+      var tier = parseInt(item.getAttribute("data-tier"), 10);
+      var badge = item.querySelector(".status-badge");
+
+      if (!live) {
+        item.classList.add("locked", "upcoming");
+        if (tier === 0 && badge) {
+          badge.textContent = "Locked";
+          badge.classList.add("status-badge--locked");
+        }
+        return;
+      }
+
+      if (tier < athTier) {
+        item.classList.add("reached");
+      } else if (tier === athTier) {
+        item.classList.add("reached", "current");
+        if (badge) {
+          badge.textContent = "Current ATH";
+          badge.classList.add("status-badge--live");
+        }
+      } else {
+        item.classList.add("upcoming");
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initGate();
     initHeaderScroll();
     initMobileNav();
     initActiveNav();
+    initJourneyProgress();
   });
 })();
