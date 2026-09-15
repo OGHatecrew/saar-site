@@ -41,5 +41,21 @@ window.SITE_CONFIG = {
   // market cap grows (never lowering it).
   // =========================================================
   JOURNEY_LIVE: false,
-  JOURNEY_ATH_TIER: 0
+  JOURNEY_ATH_TIER: 0,
+
+  // =========================================================
+  // LIVE TOKENOMICS STATS — Circulating Supply and Total Burnt
+  // on the Tokenomics section are fetched live from the chain
+  // using these settings. If the fetch fails for any reason
+  // (network issue, RPC down), the static numbers already in
+  // index.html stay on screen as a fallback.
+  //
+  // TOKEN_TOTAL_SUPPLY is the fixed genesis mint (1B) — this can
+  // never increase, so it does not need to be fetched live.
+  // =========================================================
+  TOKEN_CONTRACT: "0x8515D6bdB6b9CB5fD4f767A0c573522a7Eeb083b",
+  TOKEN_RPC_URL: "https://rpc.mainnet.chain.robinhood.com",
+  TOKEN_BURN_ADDRESS: "0x000000000000000000000000000000000000dEaD",
+  TOKEN_TOTAL_SUPPLY: 1000000000,
+  TOKEN_DECIMALS: 18
 };
